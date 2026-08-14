@@ -1,0 +1,2414 @@
+﻿<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>EcoPuntos - Usuarios</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#f1f8f4;
+    color:#263238;
+    min-height:100vh;
+}
+
+/* =========================
+   ENCABEZADO
+========================= */
+
+header{
+    background:
+    linear-gradient(
+        135deg,
+        #1b5e20,
+        #43a047
+    );
+
+    color:white;
+    padding:25px 20px;
+    text-align:center;
+}
+
+.logo{
+    font-size:32px;
+    font-weight:bold;
+}
+
+header p{
+    margin-top:7px;
+    opacity:.95;
+}
+
+/* =========================
+   CONTENEDOR
+========================= */
+
+.container{
+    width:92%;
+    max-width:1000px;
+    margin:25px auto;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    margin-bottom:20px;
+
+    box-shadow:
+    0 5px 20px rgba(0,0,0,.10);
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.login{
+    max-width:430px;
+    margin:40px auto;
+}
+
+.login h2{
+    margin-bottom:10px;
+}
+
+input,
+select{
+    width:100%;
+    padding:14px;
+
+    margin:8px 0;
+
+    border:
+    1px solid #cfd8dc;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    outline:none;
+}
+
+input:focus,
+select:focus{
+    border-color:#43a047;
+}
+
+button{
+    border:0;
+
+    border-radius:10px;
+
+    padding:13px 18px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-1px);
+}
+
+.btn-verde{
+    background:#43a047;
+    color:white;
+}
+
+.btn-verde:hover{
+    background:#2e7d32;
+}
+
+.btn-azul{
+    background:#1976d2;
+    color:white;
+}
+
+.btn-rojo{
+    background:#e53935;
+    color:white;
+}
+
+.btn-gris{
+    background:#78909c;
+    color:white;
+}
+
+.btn-naranja{
+    background:#ef6c00;
+    color:white;
+}
+
+.btn-completo{
+    width:100%;
+}
+
+/* =========================
+   OCULTO
+========================= */
+
+.oculto{
+    display:none;
+}
+
+/* =========================
+   PERFIL
+========================= */
+
+.perfil{
+
+    display:flex;
+
+    justify-content:
+    space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin-bottom:20px;
+}
+
+.usuario-info h2{
+    color:#1b5e20;
+}
+
+.usuario-info p{
+    color:#607d8b;
+    margin-top:5px;
+}
+
+.btn-salir{
+    background:#e53935;
+    color:white;
+}
+
+/* =========================
+   SALDO
+========================= */
+
+.saldo{
+
+    background:
+    linear-gradient(
+        135deg,
+        #2e7d32,
+        #66bb6a
+    );
+
+    color:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    margin-bottom:20px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.saldo::after{
+
+    content:"♻️";
+
+    position:absolute;
+
+    right:20px;
+
+    bottom:-15px;
+
+    font-size:90px;
+
+    opacity:.15;
+}
+
+.saldo-titulo{
+    font-size:15px;
+}
+
+.saldo-monto{
+
+    font-size:42px;
+
+    font-weight:bold;
+
+    margin-top:8px;
+}
+
+.saldo-puntos{
+    margin-top:7px;
+    opacity:.9;
+}
+
+/* =========================
+   GRID
+========================= */
+
+.grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:20px;
+}
+
+/* =========================
+   TITULOS
+========================= */
+
+h2{
+    color:#263238;
+    margin-bottom:12px;
+}
+
+h3{
+    color:#2e7d32;
+    margin-bottom:10px;
+}
+
+.descripcion{
+    color:#607d8b;
+    line-height:1.5;
+    margin-bottom:15px;
+}
+
+/* =========================
+   RECICLAJE
+========================= */
+
+.residuos{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:10px;
+
+    margin:15px 0;
+}
+
+.residuo{
+
+    border:
+    2px solid #e0e0e0;
+
+    padding:15px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    text-align:center;
+
+    background:white;
+}
+
+.residuo:hover{
+    border-color:#43a047;
+}
+
+.residuo.seleccionado{
+
+    border-color:#43a047;
+
+    background:#e8f5e9;
+
+    color:#1b5e20;
+
+    font-weight:bold;
+}
+
+.residuo .icono{
+    font-size:30px;
+    display:block;
+    margin-bottom:5px;
+}
+
+.puntos-preview{
+
+    background:#e8f5e9;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin:15px 0;
+
+    color:#2e7d32;
+
+    font-weight:bold;
+}
+
+/* =========================
+   RETIRO
+========================= */
+
+.limite{
+
+    background:#fff3e0;
+
+    color:#e65100;
+
+    padding:13px;
+
+    border-radius:10px;
+
+    margin:12px 0;
+
+    font-size:14px;
+}
+
+.monto-input{
+    position:relative;
+}
+
+.monto-input span{
+
+    position:absolute;
+
+    left:13px;
+
+    top:22px;
+
+    font-weight:bold;
+
+    color:#546e7a;
+}
+
+.monto-input input{
+    padding-left:38px;
+}
+
+/* =========================
+   CODIGO
+========================= */
+
+.codigo-box{
+
+    background:#263238;
+
+    color:white;
+
+    padding:20px;
+
+    border-radius:15px;
+
+    text-align:center;
+
+    margin-top:15px;
+}
+
+.codigo{
+
+    display:inline-block;
+
+    background:#111;
+
+    padding:10px 16px;
+
+    border-radius:8px;
+
+    margin-top:10px;
+
+    font-size:24px;
+
+    font-weight:bold;
+
+    letter-spacing:3px;
+
+    font-family:monospace;
+
+}
+
+/* =========================
+   HISTORIAL
+========================= */
+
+.historial-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px 0;
+
+    border-bottom:
+    1px solid #eeeeee;
+
+}
+
+.historial-item:last-child{
+    border-bottom:0;
+}
+
+.historial-info strong{
+    display:block;
+}
+
+.historial-info small{
+    color:#78909c;
+}
+
+.positivo{
+    color:#2e7d32;
+    font-weight:bold;
+}
+
+.negativo{
+    color:#e53935;
+    font-weight:bold;
+}
+
+/* =========================
+   ESTADOS
+========================= */
+
+.estado{
+
+    display:inline-block;
+
+    padding:6px 10px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    margin-top:5px;
+}
+
+.estado-pendiente{
+    background:#fff3cd;
+    color:#856404;
+}
+
+.estado-aprobado{
+    background:#d4edda;
+    color:#155724;
+}
+
+.estado-rechazado{
+    background:#f8d7da;
+    color:#721c24;
+}
+
+/* =========================
+   MENSAJES
+========================= */
+
+.mensaje{
+
+    padding:14px;
+
+    border-radius:10px;
+
+    margin-top:10px;
+
+    line-height:1.4;
+}
+
+.exito{
+    background:#e8f5e9;
+    color:#2e7d32;
+}
+
+.error{
+    background:#ffebee;
+    color:#c62828;
+}
+
+.info{
+    background:#e3f2fd;
+    color:#1565c0;
+}
+
+/* =========================
+   FIRMA
+========================= */
+
+.firma-creador{
+
+    position:fixed;
+
+    right:14px;
+
+    bottom:12px;
+
+    background:
+    rgba(255,255,255,.96);
+
+    color:#546e7a;
+
+    padding:
+    7px 11px;
+
+    border-radius:10px;
+
+    box-shadow:
+    0 3px 12px
+    rgba(0,0,0,.15);
+
+    border-left:
+    3px solid #43a047;
+
+    z-index:9999;
+
+    text-align:right;
+
+    font-size:10px;
+}
+
+.firma-creador span{
+
+    display:block;
+
+    font-size:8px;
+
+    color:#78909c;
+
+}
+
+.firma-creador strong{
+
+    display:block;
+
+    color:#263238;
+
+    font-size:10px;
+
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+
+    background:#263238;
+
+    color:white;
+
+    text-align:center;
+
+    padding:25px;
+
+    margin-top:30px;
+
+    padding-bottom:55px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:700px){
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .perfil{
+        display:block;
+    }
+
+    .btn-salir{
+        margin-top:12px;
+    }
+
+    .residuos{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .saldo-monto{
+        font-size:36px;
+    }
+
+}
+
+@media(max-width:450px){
+
+    .container{
+        width:95%;
+    }
+
+    .card{
+        padding:18px;
+    }
+
+    .residuos{
+        grid-template-columns:1fr;
+    }
+
+    .firma-creador{
+        right:8px;
+        bottom:8px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        ♻️ EcoPuntos
+    </div>
+
+    <p>
+        Recicla, gana puntos y conviértelos en soles
+    </p>
+
+</header>
+
+
+<!-- =========================
+     LOGIN / REGISTRO
+========================= -->
+
+<div
+id="pantallaAcceso"
+class="container">
+
+    <div class="card login">
+
+        <h2>
+            👤 Bienvenido
+        </h2>
+
+        <p class="descripcion">
+            Crea tu cuenta o inicia sesión
+            para comenzar a reciclar.
+        </p>
+
+
+        <input
+        id="nombreRegistro"
+        type="text"
+        placeholder="Nombre completo">
+
+
+        <input
+        id="correoRegistro"
+        type="email"
+        placeholder="Correo electrónico">
+
+
+        <input
+        id="claveRegistro"
+        type="password"
+        placeholder="Contraseña">
+
+
+        <button
+        class="btn-verde btn-completo"
+        onclick="registrar()">
+
+            Crear cuenta
+
+        </button>
+
+
+        <br><br>
+
+
+        <hr>
+
+
+        <br>
+
+
+        <h3>
+            Ya tengo una cuenta
+        </h3>
+
+
+        <input
+        id="correoLogin"
+        type="email"
+        placeholder="Correo electrónico">
+
+
+        <input
+        id="claveLogin"
+        type="password"
+        placeholder="Contraseña">
+
+
+        <button
+        class="btn-azul btn-completo"
+        onclick="iniciarSesion()">
+
+            Iniciar sesión
+
+        </button>
+
+
+        <div
+        id="mensajeAcceso"
+        class="mensaje oculto">
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================
+     PANEL USUARIO
+========================= -->
+
+<div
+id="panelUsuario"
+class="container oculto">
+
+
+    <!-- PERFIL -->
+
+    <div class="perfil">
+
+        <div class="usuario-info">
+
+            <h2>
+                Hola, <span id="nombreUsuario">
+                Usuario
+                </span> 👋
+            </h2>
+
+            <p>
+                ¡Gracias por ayudar al planeta!
+            </p>
+
+        </div>
+
+
+        <button
+        class="btn-salir"
+        onclick="cerrarSesion()">
+
+            Cerrar sesión
+
+        </button>
+
+    </div>
+
+
+    <!-- SALDO -->
+
+    <div class="saldo">
+
+        <div class="saldo-titulo">
+            💰 Mi saldo
+        </div>
+
+        <div
+        class="saldo-monto"
+        id="saldoUsuario">
+
+            S/ 0.00
+
+        </div>
+
+        <div
+        class="saldo-puntos"
+        id="puntosUsuario">
+
+            0 puntos
+
+        </div>
+
+    </div>
+
+
+    <div class="grid">
+
+
+        <!-- =====================
+             RECICLAR
+        ====================== -->
+
+
+        <div class="card">
+
+            <h2>
+                ♻️ Reciclar
+            </h2>
+
+            <p class="descripcion">
+
+                Selecciona el material
+                que deseas reciclar.
+
+                El administrador verificará
+                tu entrega.
+
+            </p>
+
+
+            <div class="residuos">
+
+
+                <div
+                class="residuo"
+                onclick="seleccionarResiduo(this,'Plástico',100)">
+
+                    <span class="icono">
+                        🧴
+                    </span>
+
+                    Plástico
+
+                </div>
+
+
+                <div
+                class="residuo"
+                onclick="seleccionarResiduo(this,'Cartón',80)">
+
+                    <span class="icono">
+                        📦
+                    </span>
+
+                    Cartón
+
+                </div>
+
+
+                <div
+                class="residuo"
+                onclick="seleccionarResiduo(this,'Papel',70)">
+
+                    <span class="icono">
+                        📄
+                    </span>
+
+                    Papel
+
+                </div>
+
+
+                <div
+                class="residuo"
+                onclick="seleccionarResiduo(this,'Vidrio',120)">
+
+                    <span class="icono">
+                        🍾
+                    </span>
+
+                    Vidrio
+
+                </div>
+
+            </div>
+
+
+            <div
+            id="puntosPreview"
+            class="puntos-preview">
+
+                Selecciona un material
+
+            </div>
+
+
+            <button
+            class="btn-verde btn-completo"
+            onclick="solicitarReciclaje()">
+
+                ♻️ Solicitar reciclaje
+
+            </button>
+
+
+            <div
+            id="mensajeReciclaje"
+            class="mensaje oculto">
+            </div>
+
+        </div>
+
+
+
+        <!-- =====================
+             RETIRO
+        ====================== -->
+
+
+        <div class="card">
+
+            <h2>
+                💵 Retirar dinero
+            </h2>
+
+            <p class="descripcion">
+
+                Convierte tus puntos
+                en dinero.
+
+            </p>
+
+
+            <div class="limite">
+
+                ℹ️ Retiro mínimo:
+                <strong>S/ 1.00</strong>
+
+                <br>
+
+                Retiro máximo:
+                <strong>S/ 50.00</strong>
+
+                <br>
+
+                <strong>
+                    100 puntos = S/ 1.00
+                </strong>
+
+            </div>
+
+
+            <div class="monto-input">
+
+                <span>
+                    S/
+                </span>
+
+                <input
+                id="montoRetiro"
+                type="number"
+                min="1"
+                max="50"
+                step="0.01"
+                placeholder="Monto a retirar">
+
+            </div>
+
+
+            <button
+            class="btn-naranja btn-completo"
+            onclick="solicitarRetiro()">
+
+                💰 Solicitar retiro
+
+            </button>
+
+
+            <div
+            id="mensajeRetiro"
+            class="mensaje oculto">
+            </div>
+
+
+            <div
+            id="codigoRetiroBox"
+            class="codigo-box oculto">
+
+                🔐 Código para el administrador
+
+                <div
+                id="codigoRetiro"
+                class="codigo">
+
+                </div>
+
+                <p style="margin-top:10px">
+
+                    Presenta este código
+                    al administrador.
+
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =========================
+         ESTADO DE SOLICITUDES
+    ========================== -->
+
+
+    <div class="card">
+
+        <h2>
+            📋 Mis solicitudes
+        </h2>
+
+        <div
+        id="listaSolicitudes">
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         HISTORIAL
+    ========================== -->
+
+
+    <div class="card">
+
+        <h2>
+            📜 Historial
+        </h2>
+
+        <div
+        id="historial">
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
+<footer>
+
+    ♻️ EcoPuntos Perú
+
+    <br><br>
+
+    Reciclando juntos por un futuro mejor.
+
+</footer>
+
+
+<!-- =========================
+     FIRMA
+========================= -->
+
+<div class="firma-creador">
+
+    <span>
+        Creado por
+    </span>
+
+    <strong>
+        Ing. de Sistemas Yacks Oviedo
+    </strong>
+
+</div>
+
+
+<script>
+
+/* =====================================
+   VARIABLES
+===================================== */
+
+let usuarios =
+
+JSON.parse(
+
+    localStorage.getItem(
+        "ecoUsuarios"
+    )
+
+) || {};
+
+
+let solicitudes =
+
+JSON.parse(
+
+    localStorage.getItem(
+        "ecoSolicitudes"
+    )
+
+) || {};
+
+
+if(
+    !Array.isArray(solicitudes)
+){
+    solicitudes = [];
+}
+
+
+let retiros =
+
+JSON.parse(
+
+    localStorage.getItem(
+        "ecoRetiros"
+    )
+
+) || {};
+
+
+if(
+    !Array.isArray(retiros)
+){
+    retiros = [];
+}
+
+
+let usuarioActual = null;
+
+
+let residuoSeleccionado = null;
+
+let puntosSeleccionados = 0;
+
+
+/* =====================================
+   REGISTRAR
+===================================== */
+
+function registrar(){
+
+    const nombre =
+
+    document
+    .getElementById(
+        "nombreRegistro"
+    )
+    .value
+    .trim();
+
+
+    const correo =
+
+    document
+    .getElementById(
+        "correoRegistro"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+
+    const clave =
+
+    document
+    .getElementById(
+        "claveRegistro"
+    )
+    .value;
+
+
+    if(
+        !nombre ||
+        !correo ||
+        !clave
+    ){
+
+        mostrarAcceso(
+            "Completa todos los campos.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(
+        usuarios[correo]
+    ){
+
+        mostrarAcceso(
+            "Este correo ya tiene una cuenta.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    usuarios[correo] = {
+
+        nombre:nombre,
+
+        correo:correo,
+
+        clave:clave,
+
+        puntos:0,
+
+        historial:[]
+
+    };
+
+
+    guardarUsuarios();
+
+
+    mostrarAcceso(
+        "✅ Cuenta creada correctamente. Ahora puedes iniciar sesión.",
+        "exito"
+    );
+
+
+    document
+    .getElementById(
+        "nombreRegistro"
+    )
+    .value = "";
+
+
+    document
+    .getElementById(
+        "correoRegistro"
+    )
+    .value = "";
+
+
+    document
+    .getElementById(
+        "claveRegistro"
+    )
+    .value = "";
+
+}
+
+
+/* =====================================
+   LOGIN
+===================================== */
+
+function iniciarSesion(){
+
+    const correo =
+
+    document
+    .getElementById(
+        "correoLogin"
+    )
+    .value
+    .trim()
+    .toLowerCase();
+
+
+    const clave =
+
+    document
+    .getElementById(
+        "claveLogin"
+    )
+    .value;
+
+
+    if(
+        !usuarios[correo]
+    ){
+
+        mostrarAcceso(
+            "❌ No existe una cuenta con ese correo.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    if(
+        usuarios[correo].clave !==
+        clave
+    ){
+
+        mostrarAcceso(
+            "❌ Contraseña incorrecta.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    usuarioActual = correo;
+
+
+    document
+    .getElementById(
+        "pantallaAcceso"
+    )
+    .classList
+    .add("oculto");
+
+
+    document
+    .getElementById(
+        "panelUsuario"
+    )
+    .classList
+    .remove("oculto");
+
+
+    cargarUsuario();
+
+}
+
+
+/* =====================================
+   CARGAR USUARIO
+===================================== */
+
+function cargarUsuario(){
+
+    if(
+        !usuarioActual
+    ){
+        return;
+    }
+
+
+    recargarDatos();
+
+
+    const usuario =
+
+    usuarios[
+        usuarioActual
+    ];
+
+
+    document
+    .getElementById(
+        "nombreUsuario"
+    )
+    .textContent =
+    usuario.nombre;
+
+
+    actualizarSaldo();
+
+
+    mostrarSolicitudes();
+
+
+    mostrarHistorial();
+
+}
+
+
+/* =====================================
+   SALDO
+===================================== */
+
+function actualizarSaldo(){
+
+    const usuario =
+
+    usuarios[
+        usuarioActual
+    ];
+
+
+    const puntos =
+
+    Number(
+        usuario.puntos
+    ) || 0;
+
+
+    const soles =
+
+    puntos / 100;
+
+
+    document
+    .getElementById(
+        "saldoUsuario"
+    )
+    .textContent =
+
+    "S/ " +
+    soles.toFixed(2);
+
+
+    document
+    .getElementById(
+        "puntosUsuario"
+    )
+    .textContent =
+
+    puntos +
+    " puntos";
+
+}
+
+
+/* =====================================
+   SELECCIONAR RESIDUO
+===================================== */
+
+function seleccionarResiduo(
+
+    elemento,
+    nombre,
+    puntos
+
+){
+
+    document
+    .querySelectorAll(
+        ".residuo"
+    )
+    .forEach(
+        r =>
+        r.classList
+        .remove(
+            "seleccionado"
+        )
+    );
+
+
+    elemento
+    .classList
+    .add(
+        "seleccionado"
+    );
+
+
+    residuoSeleccionado =
+    nombre;
+
+
+    puntosSeleccionados =
+    puntos;
+
+
+    document
+    .getElementById(
+        "puntosPreview"
+    )
+    .innerHTML =
+
+    "⭐ Recibirás " +
+    "<strong>" +
+    puntos +
+    " puntos</strong> " +
+    "si el administrador aprueba el reciclaje.";
+
+}
+
+
+/* =====================================
+   SOLICITAR RECICLAJE
+===================================== */
+
+function solicitarReciclaje(){
+
+    if(
+        !usuarioActual
+    ){
+        return;
+    }
+
+
+    if(
+        !residuoSeleccionado
+    ){
+
+        mostrarMensaje(
+            "mensajeReciclaje",
+            "Selecciona primero un material.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const codigo =
+
+    generarCodigo(
+        "REC"
+    );
+
+
+    const solicitud = {
+
+        id:
+        Date.now(),
+
+        usuario:
+        usuarioActual,
+
+        nombreUsuario:
+        usuarios[
+            usuarioActual
+        ].nombre,
+
+        residuo:
+        residuoSeleccionado,
+
+        puntos:
+        puntosSeleccionados,
+
+        codigo:
+        codigo,
+
+        estado:
+        "pendiente",
+
+        fecha:
+        new Date()
+        .toLocaleString()
+
+    };
+
+
+    solicitudes.push(
+        solicitud
+    );
+
+
+    guardarSolicitudes();
+
+
+    mostrarMensaje(
+        "mensajeReciclaje",
+        "✅ Solicitud creada. Entrega el material al administrador y muéstrale tu código.",
+        "exito"
+    );
+
+
+    document
+    .getElementById(
+        "puntosPreview"
+    )
+    .innerHTML =
+
+    "🔑 Tu código es: " +
+    "<strong>" +
+    codigo +
+    "</strong>";
+
+
+    mostrarSolicitudes();
+
+}
+
+
+/* =====================================
+   SOLICITAR RETIRO
+===================================== */
+
+function solicitarRetiro(){
+
+    if(
+        !usuarioActual
+    ){
+        return;
+    }
+
+
+    const monto =
+
+    Number(
+
+        document
+        .getElementById(
+            "montoRetiro"
+        )
+        .value
+
+    );
+
+
+    if(
+        !monto ||
+        monto < 1 ||
+        monto > 50
+    ){
+
+        mostrarMensaje(
+            "mensajeRetiro",
+            "El retiro debe ser entre S/ 1.00 y S/ 50.00.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const usuario =
+
+    usuarios[
+        usuarioActual
+    ];
+
+
+    const saldo =
+
+    Number(
+        usuario.puntos
+    ) / 100;
+
+
+    if(
+        monto > saldo
+    ){
+
+        mostrarMensaje(
+            "mensajeRetiro",
+            "❌ No tienes saldo suficiente. Tu saldo es S/ " +
+            saldo.toFixed(2),
+            "error"
+        );
+
+        return;
+    }
+
+
+    /*
+       Evitar varios retiros
+       pendientes al mismo tiempo.
+    */
+
+    const retiroPendiente =
+
+    retiros.find(
+
+        r =>
+
+        r.usuario ===
+        usuarioActual &&
+
+        r.estado ===
+        "pendiente"
+
+    );
+
+
+    if(
+        retiroPendiente
+    ){
+
+        mostrarMensaje(
+            "mensajeRetiro",
+            "⚠️ Ya tienes un retiro pendiente. Espera a que el administrador lo procese.",
+            "error"
+        );
+
+        return;
+    }
+
+
+    const codigo =
+
+    generarCodigo(
+        "RET"
+    );
+
+
+    const retiro = {
+
+        id:
+        Date.now(),
+
+        usuario:
+        usuarioActual,
+
+        nombreUsuario:
+        usuario.nombre,
+
+        monto:
+        monto,
+
+        codigo:
+        codigo,
+
+        estado:
+        "pendiente",
+
+        fecha:
+        new Date()
+        .toLocaleString()
+
+    };
+
+
+    retiros.push(
+        retiro
+    );
+
+
+    guardarRetiros();
+
+
+    document
+    .getElementById(
+        "montoRetiro"
+    )
+    .value = "";
+
+
+    document
+    .getElementById(
+        "codigoRetiro"
+    )
+    .textContent =
+    codigo;
+
+
+    document
+    .getElementById(
+        "codigoRetiroBox"
+    )
+    .classList
+    .remove(
+        "oculto"
+    );
+
+
+    mostrarMensaje(
+        "mensajeRetiro",
+        "✅ Solicitud enviada. El administrador debe aprobarla.",
+        "exito"
+    );
+
+
+    mostrarSolicitudes();
+
+}
+
+
+/* =====================================
+   MOSTRAR SOLICITUDES
+===================================== */
+
+function mostrarSolicitudes(){
+
+    const contenedor =
+
+    document
+    .getElementById(
+        "listaSolicitudes"
+    );
+
+
+    contenedor.innerHTML = "";
+
+
+    const misReciclajes =
+
+    solicitudes
+    .filter(
+
+        s =>
+
+        s.usuario ===
+        usuarioActual
+
+    )
+    .reverse();
+
+
+    const misRetiros =
+
+    retiros
+    .filter(
+
+        r =>
+
+        r.usuario ===
+        usuarioActual
+
+    )
+    .reverse();
+
+
+    if(
+        misReciclajes.length === 0 &&
+        misRetiros.length === 0
+    ){
+
+        contenedor.innerHTML = `
+
+            <p style="color:#78909c">
+
+                📭 Todavía no tienes solicitudes.
+
+            </p>
+
+        `;
+
+        return;
+    }
+
+
+    misReciclajes.forEach(
+
+        solicitud => {
+
+            const estado =
+
+            crearEstado(
+                solicitud.estado
+            );
+
+
+            contenedor.innerHTML += `
+
+                <div class="historial-item">
+
+                    <div class="historial-info">
+
+                        <strong>
+
+                            ♻️ ${solicitud.residuo}
+
+                        </strong>
+
+                        <small>
+
+                            Código:
+                            ${solicitud.codigo}
+
+                            <br>
+
+                            ${solicitud.fecha}
+
+                        </small>
+
+                        <br>
+
+                        ${estado}
+
+                    </div>
+
+
+                    <div class="positivo">
+
+                        +${solicitud.puntos}
+
+                        puntos
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    misRetiros.forEach(
+
+        retiro => {
+
+            const estado =
+
+            crearEstado(
+                retiro.estado
+            );
+
+
+            contenedor.innerHTML += `
+
+                <div class="historial-item">
+
+                    <div class="historial-info">
+
+                        <strong>
+
+                            💰 Retiro de dinero
+
+                        </strong>
+
+                        <small>
+
+                            Código:
+                            ${retiro.codigo}
+
+                            <br>
+
+                            ${retiro.fecha}
+
+                        </small>
+
+                        <br>
+
+                        ${estado}
+
+                    </div>
+
+
+                    <div class="negativo">
+
+                        S/
+                        ${Number(
+                            retiro.monto
+                        ).toFixed(2)}
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+}
+
+
+/* =====================================
+   HISTORIAL
+===================================== */
+
+function mostrarHistorial(){
+
+    const contenedor =
+
+    document
+    .getElementById(
+        "historial"
+    );
+
+
+    const usuario =
+
+    usuarios[
+        usuarioActual
+    ];
+
+
+    const historial =
+
+    usuario.historial || [];
+
+
+    if(
+        historial.length === 0
+    ){
+
+        contenedor.innerHTML = `
+
+            <p style="color:#78909c">
+
+                📭 Tu historial está vacío.
+
+            </p>
+
+        `;
+
+        return;
+    }
+
+
+    contenedor.innerHTML = "";
+
+
+    historial
+    .slice()
+    .reverse()
+    .forEach(
+
+        item => {
+
+            const clase =
+
+            Number(
+                item.puntos
+            ) >= 0
+
+            ?
+
+            "positivo"
+
+            :
+
+            "negativo";
+
+
+            const signo =
+
+            Number(
+                item.puntos
+            ) >= 0
+
+            ?
+
+            "+"
+
+            :
+
+            "";
+
+
+            contenedor.innerHTML += `
+
+                <div class="historial-item">
+
+                    <div class="historial-info">
+
+                        <strong>
+
+                            ${item.texto}
+
+                        </strong>
+
+                        <small>
+
+                            ${item.fecha}
+
+                        </small>
+
+                    </div>
+
+
+                    <div class="${clase}">
+
+                        ${signo}${item.puntos}
+
+                        puntos
+
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+    );
+
+}
+
+
+/* =====================================
+   ESTADO
+===================================== */
+
+function crearEstado(
+
+    estado
+
+){
+
+    if(
+        estado ===
+        "aprobado"
+    ){
+
+        return `
+
+            <span class="estado estado-aprobado">
+
+                ✅ Aprobado
+
+            </span>
+
+        `;
+
+    }
+
+
+    if(
+        estado ===
+        "rechazado"
+    ){
+
+        return `
+
+            <span class="estado estado-rechazado">
+
+                ❌ Rechazado
+
+            </span>
+
+        `;
+
+    }
+
+
+    return `
+
+        <span class="estado estado-pendiente">
+
+            ⏳ Pendiente
+
+        </span>
+
+    `;
+
+}
+
+
+/* =====================================
+   GENERAR CODIGO
+===================================== */
+
+function generarCodigo(
+
+    prefijo
+
+){
+
+    return (
+
+        prefijo +
+
+        "-" +
+
+        Math.floor(
+
+            1000 +
+
+            Math.random() *
+            9000
+
+        )
+
+    );
+
+}
+
+
+/* =====================================
+   MENSAJES
+===================================== */
+
+function mostrarMensaje(
+
+    id,
+    texto,
+    tipo
+
+){
+
+    const caja =
+
+    document
+    .getElementById(
+        id
+    );
+
+
+    caja.textContent =
+    texto;
+
+
+    caja.className =
+
+    "mensaje " +
+    tipo;
+
+
+    caja.style.display =
+    "block";
+
+}
+
+
+/* =====================================
+   MENSAJE ACCESO
+===================================== */
+
+function mostrarAcceso(
+
+    texto,
+    tipo
+
+){
+
+    mostrarMensaje(
+
+        "mensajeAcceso",
+
+        texto,
+
+        tipo
+
+    );
+
+}
+
+
+/* =====================================
+   GUARDAR DATOS
+===================================== */
+
+function guardarUsuarios(){
+
+    localStorage.setItem(
+
+        "ecoUsuarios",
+
+        JSON.stringify(
+            usuarios
+        )
+
+    );
+
+}
+
+
+function guardarSolicitudes(){
+
+    localStorage.setItem(
+
+        "ecoSolicitudes",
+
+        JSON.stringify(
+            solicitudes
+        )
+
+    );
+
+}
+
+
+function guardarRetiros(){
+
+    localStorage.setItem(
+
+        "ecoRetiros",
+
+        JSON.stringify(
+            retiros
+        )
+
+    );
+
+}
+
+
+/* =====================================
+   RECARGAR DATOS
+===================================== */
+
+function recargarDatos(){
+
+    usuarios =
+
+    JSON.parse(
+
+        localStorage.getItem(
+            "ecoUsuarios"
+        )
+
+    ) || {};
+
+
+    solicitudes =
+
+    JSON.parse(
+
+        localStorage.getItem(
+            "ecoSolicitudes"
+        )
+
+    ) || [];
+
+
+    retiros =
+
+    JSON.parse(
+
+        localStorage.getItem(
+            "ecoRetiros"
+        )
+
+    ) || [];
+
+}
+
+
+/* =====================================
+   CERRAR SESION
+===================================== */
+
+function cerrarSesion(){
+
+    usuarioActual = null;
+
+
+    document
+    .getElementById(
+        "panelUsuario"
+    )
+    .classList
+    .add(
+        "oculto"
+    );
+
+
+    document
+    .getElementById(
+        "pantallaAcceso"
+    )
+    .classList
+    .remove(
+        "oculto"
+    );
+
+}
+
+
+/* =====================================
+   ACTUALIZAR AUTOMATICAMENTE
+===================================== */
+
+setInterval(
+
+    function(){
+
+        if(
+            usuarioActual
+        ){
+
+            recargarDatos();
+
+            cargarUsuario();
+
+        }
+
+    },
+
+    3000
+
+);
+
+</script>
+
+</body>
+
+</html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
