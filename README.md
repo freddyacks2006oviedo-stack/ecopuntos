@@ -1,4 +1,4 @@
-[EcoPuntos_Unificado_Usuarios_Admin (1).html](https://github.com/user-attachments/files/31050850/EcoPuntos_Unificado_Usuarios_Admin.1.html)
+[EcoPuntos_EJECUTABLE_FINAL_PEDIDOS_CORREGIDO.html](https://github.com/user-attachments/files/31088814/EcoPuntos_EJECUTABLE_FINAL_PEDIDOS_CORREGIDO.html)
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -1267,36 +1267,40 @@ header{background:linear-gradient(135deg,#1b5e20,#43a047)!important;}
 
             </p>
 <div class="residuos">
-<div class="residuo" onclick="seleccionarResiduo(this,'Plástico',100)">
+<div class="residuo" onclick="seleccionarResiduo(this,'Plástico',10)" title="10 puntos = S/ 0.10">
 <span class="icono">
                         🧴
                     </span>
 
                     Plástico
+                    <small style="display:block;margin-top:6px;color:#607d8b;font-weight:normal;">10 puntos · S/ 0.10</small>
 
                 </div>
-<div class="residuo" onclick="seleccionarResiduo(this,'Cartón',80)">
+<div class="residuo" onclick="seleccionarResiduo(this,'Cartón',5)" title="5 puntos = S/ 0.05">
 <span class="icono">
                         📦
                     </span>
 
                     Cartón
+                    <small style="display:block;margin-top:6px;color:#607d8b;font-weight:normal;">5 puntos · S/ 0.05</small>
 
                 </div>
-<div class="residuo" onclick="seleccionarResiduo(this,'Papel',70)">
+<div class="residuo" onclick="seleccionarResiduo(this,'Papel',5)" title="5 puntos = S/ 0.05">
 <span class="icono">
                         📄
                     </span>
 
                     Papel
+                    <small style="display:block;margin-top:6px;color:#607d8b;font-weight:normal;">5 puntos · S/ 0.05</small>
 
                 </div>
-<div class="residuo" onclick="seleccionarResiduo(this,'Vidrio',120)">
+<div class="residuo" onclick="seleccionarResiduo(this,'Vidrio',8)" title="8 puntos = S/ 0.08">
 <span class="icono">
                         🍾
                     </span>
 
                     Vidrio
+                    <small style="display:block;margin-top:6px;color:#607d8b;font-weight:normal;">8 puntos · S/ 0.08</small>
 
                 </div>
 </div>
@@ -1551,7 +1555,7 @@ header{background:linear-gradient(135deg,#1b5e20,#43a047)!important;}
 
             </button>
 </div>
-<div id="listaSolicitudes">
+<div id="listaSolicitudesAdmin">
 </div>
 </div>
 </div>
@@ -1961,7 +1965,7 @@ function seleccionarResiduo(
     "<strong>" +
     puntos +
     " puntos</strong> " +
-    "si el administrador aprueba el reciclaje.";
+    "si el administrador acepta y completa tu entrega.";
 
 }
 
@@ -1992,6 +1996,21 @@ function solicitarReciclaje(){
         return;
     }
 
+
+    const pedidoPendiente = solicitudes.find(
+        s => s.usuario === usuarioActual &&
+             s.residuo === residuoSeleccionado &&
+             s.estado === "pendiente"
+    );
+
+    if(pedidoPendiente){
+        mostrarMensaje(
+            "mensajeReciclaje",
+            "⚠️ Ya tienes un pedido de " + residuoSeleccionado + " pendiente. Espera a que el administrador lo acepte o rechace.",
+            "info"
+        );
+        return;
+    }
 
     const codigo =
 
@@ -2027,7 +2046,11 @@ function solicitarReciclaje(){
 
         fecha:
         new Date()
-        .toLocaleString()
+        .toLocaleString(),
+
+        fechaAprobacion: null,
+        fechaRechazo: null,
+        mensaje: "Pedido recibido. Pendiente de verificación del administrador."
 
     };
 
@@ -2042,7 +2065,7 @@ function solicitarReciclaje(){
 
     mostrarMensaje(
         "mensajeReciclaje",
-        "✅ Solicitud creada. Entrega el material al administrador y muéstrale tu código.",
+        "✅ Pedido registrado correctamente. Entrega el material y muestra tu código al administrador. Quedará PENDIENTE hasta que él lo acepte.",
         "exito"
     );
 
@@ -2350,6 +2373,11 @@ function mostrarSolicitudes(){
 
                         ${estado}
 
+                        <div class="mensaje ${solicitud.estado === "aprobado" ? "exito" : solicitud.estado === "rechazado" ? "error" : "info"}" style="margin-top:8px;font-size:13px;">
+                            ${solicitud.mensaje || mensajeProcesoSolicitud("reciclaje", solicitud.estado)}
+                            ${solicitud.fechaAprobacion ? "<br><small>Procesado: " + solicitud.fechaAprobacion + "</small>" : ""}
+                        </div>
+
                     </div>
 
 
@@ -2406,6 +2434,11 @@ function mostrarSolicitudes(){
                         <br>
 
                         ${estado}
+
+                        <div class="mensaje ${retiro.estado === "aprobado" ? "exito" : retiro.estado === "rechazado" ? "error" : "info"}" style="margin-top:8px;font-size:13px;">
+                            ${retiro.mensaje || mensajeProcesoSolicitud("retiro", retiro.estado)}
+                            ${retiro.fechaAprobacion ? "<br><small>Procesado: " + retiro.fechaAprobacion + "</small>" : ""}
+                        </div>
 
                     </div>
 
@@ -2609,6 +2642,24 @@ function crearEstado(
 
     `;
 
+}
+
+
+/* =====================================
+   MENSAJE DE PROCESO
+===================================== */
+function mensajeProcesoSolicitud(tipo, estado){
+    if(tipo === "reciclaje"){
+        if(estado === "pendiente") return "⏳ Pedido recibido. Esperando que el administrador verifique y acepte tu entrega.";
+        if(estado === "aprobado") return "✅ Pedido realizado. El administrador aceptó la entrega y tus puntos ya fueron acreditados.";
+        if(estado === "rechazado") return "❌ Pedido rechazado. No se acreditaron puntos.";
+    }
+    if(tipo === "retiro"){
+        if(estado === "pendiente") return "⏳ Retiro solicitado. Esperando que el administrador verifique el código y entregue el dinero.";
+        if(estado === "aprobado") return "✅ Retiro realizado. El administrador aprobó la solicitud y registró la entrega del dinero.";
+        if(estado === "rechazado") return "❌ Retiro rechazado. No se descontaron puntos.";
+    }
+    return "";
 }
 
 
@@ -3191,7 +3242,7 @@ function adminMostrarRetiros(){
 
                         "adminAprobarRetiro('${retiro.id}')">
 
-                        ✅ Aprobar y entregar dinero
+                        ✅ Aceptar y completar entrega
 
                     </button>
 
@@ -3343,6 +3394,10 @@ function adminMostrarRetiros(){
                 ${retiro.codigo}
 
             </span>
+
+            <div class="mensaje ${retiro.estado === "aprobado" ? "exito" : retiro.estado === "rechazado" ? "error" : "info"}" style="margin-top:15px;">
+                ${retiro.mensaje || mensajeProcesoSolicitud("retiro", retiro.estado)}
+            </div>
 
 
             ${acciones}
@@ -3640,6 +3695,8 @@ function adminAprobarRetiro(id){
 
         .toLocaleString();
 
+    retiro.mensaje = "Retiro realizado: código verificado y dinero entregado al usuario.";
+
 
 
     /*
@@ -3807,6 +3864,8 @@ function adminRechazarRetiro(id){
     retiro.estado =
 
         "rechazado";
+
+    retiro.mensaje = "Retiro rechazado por el administrador. No se descontaron puntos.";
 
 
     retiro.fechaRechazo =
@@ -4267,13 +4326,18 @@ function adminMostrarSolicitudes(){
     recargarDatos();
 
 
+    if(!document.getElementById("listaSolicitudesAdmin")){
+        return;
+    }
+
+
     const contenedor =
 
         document
 
         .getElementById(
 
-            "listaSolicitudes"
+            "listaSolicitudesAdmin"
 
         );
 
@@ -4419,7 +4483,7 @@ function adminMostrarSolicitudes(){
 
                         "adminAprobarReciclaje('${solicitud.id}')">
 
-                        ✅ Aprobar
+                        ✅ Aceptar y completar
 
                     </button>
 
@@ -4558,6 +4622,10 @@ function adminMostrarSolicitudes(){
 
             </span>
 
+            <div class="mensaje ${solicitud.estado === "aprobado" ? "exito" : solicitud.estado === "rechazado" ? "error" : "info"}" style="margin-top:15px;">
+                ${solicitud.mensaje || mensajeProcesoSolicitud("reciclaje", solicitud.estado)}
+            </div>
+
 
             ${acciones}
 
@@ -4675,6 +4743,8 @@ function adminAprobarReciclaje(id){
 
         "aprobado";
 
+    solicitud.fechaAprobacion = new Date().toLocaleString();
+    solicitud.mensaje = "Pedido realizado: entrega verificada y puntos acreditados.";
 
 
     usuario.puntos =
@@ -4844,6 +4914,8 @@ function adminRechazarReciclaje(id){
 
         "rechazado";
 
+    solicitud.fechaRechazo = new Date().toLocaleString();
+    solicitud.mensaje = "Pedido rechazado por el administrador. No se acreditaron puntos.";
 
 
     localStorage.setItem(
