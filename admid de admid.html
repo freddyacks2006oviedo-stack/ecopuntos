@@ -1,0 +1,3308 @@
+﻿<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>EcoPuntos - Administrador</title>
+
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#eef3f5;
+    color:#263238;
+}
+
+header{
+    background:
+    linear-gradient(
+        135deg,
+        #263238,
+        #455a64
+    );
+
+    color:white;
+    padding:25px;
+    text-align:center;
+}
+
+.logo{
+    font-size:34px;
+    font-weight:bold;
+}
+
+header p{
+    margin-top:7px;
+}
+
+.container{
+    width:92%;
+    max-width:1150px;
+    margin:25px auto;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    margin-bottom:20px;
+    box-shadow:0 5px 18px #0002;
+}
+
+h2{
+    color:#263238;
+    margin-bottom:15px;
+}
+
+.oculto{
+    display:none;
+}
+
+
+/* LOGIN */
+
+.login{
+    max-width:430px;
+    margin:50px auto;
+}
+
+input{
+    width:100%;
+    padding:14px;
+    margin:8px 0;
+    border:1px solid #ccc;
+    border-radius:10px;
+    font-size:16px;
+}
+
+button{
+    border:0;
+    border-radius:10px;
+    padding:13px 18px;
+    cursor:pointer;
+    font-size:15px;
+}
+
+.btn-entrar{
+    width:100%;
+    background:#455a64;
+    color:white;
+    margin-top:10px;
+}
+
+.btn-salir{
+    background:#e53935;
+    color:white;
+}
+
+.btn-buscar{
+    background:#455a64;
+    color:white;
+}
+
+.btn-aprobar{
+    background:#43a047;
+    color:white;
+}
+
+.btn-rechazar{
+    background:#e53935;
+    color:white;
+}
+
+.btn-gris{
+    background:#78909c;
+    color:white;
+}
+
+
+/* ADMIN */
+
+.admin-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
+
+
+/* ESTADISTICAS */
+
+.estadisticas{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(5,1fr);
+
+    gap:15px;
+
+}
+
+.stat{
+
+    color:white;
+
+    padding:20px;
+
+    border-radius:16px;
+
+}
+
+.stat h3{
+
+    font-size:30px;
+
+    margin-top:8px;
+
+}
+
+.stat-pendiente{
+    background:#f9a825;
+}
+
+.stat-aprobado{
+    background:#43a047;
+}
+
+.stat-rechazado{
+    background:#e53935;
+}
+
+.stat-puntos{
+    background:#1976d2;
+}
+
+.stat-retiros{
+    background:#ef6c00;
+}
+
+
+/* BUSCAR */
+
+.buscador{
+
+    display:flex;
+
+    gap:10px;
+
+}
+
+.buscador input{
+
+    margin:0;
+
+    flex:1;
+
+}
+
+
+/* SOLICITUD */
+
+.solicitud{
+
+    border:
+    2px solid #e0e0e0;
+
+    border-radius:16px;
+
+    padding:20px;
+
+    margin-bottom:15px;
+
+}
+
+.solicitud-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+}
+
+.codigo{
+
+    background:#263238;
+
+    color:white;
+
+    padding:8px 12px;
+
+    border-radius:8px;
+
+    font-family:monospace;
+
+    font-weight:bold;
+
+    letter-spacing:1px;
+
+}
+
+.estado{
+
+    padding:7px 12px;
+
+    border-radius:20px;
+
+    font-weight:bold;
+
+    font-size:14px;
+
+}
+
+.pendiente{
+
+    background:#fff3cd;
+
+    color:#856404;
+
+}
+
+.aprobado{
+
+    background:#d4edda;
+
+    color:#155724;
+
+}
+
+.rechazado{
+
+    background:#f8d7da;
+
+    color:#721c24;
+
+}
+
+
+/* INFO */
+
+.info-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:10px;
+
+    margin-bottom:15px;
+
+}
+
+.info{
+
+    background:#f5f7f8;
+
+    padding:13px;
+
+    border-radius:10px;
+
+}
+
+.info strong{
+
+    display:block;
+
+    color:#546e7a;
+
+    margin-bottom:5px;
+
+}
+
+
+/* ACCIONES */
+
+.acciones{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:18px;
+
+}
+
+
+/* FILTROS */
+
+.filtros{
+
+    display:flex;
+
+    gap:10px;
+
+    margin:15px 0;
+
+    flex-wrap:wrap;
+
+}
+
+.filtros button{
+
+    background:#eceff1;
+
+}
+
+.filtros button.activo{
+
+    background:#455a64;
+
+    color:white;
+
+}
+
+
+/* MONTO */
+
+.monto{
+
+    font-size:28px;
+
+    font-weight:bold;
+
+    color:#e65100;
+
+}
+
+
+/* MENSAJES */
+
+.mensaje{
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin-top:10px;
+
+}
+
+.error{
+
+    background:#ffebee;
+
+    color:#c62828;
+
+}
+
+.exito{
+
+    background:#e8f5e9;
+
+    color:#2e7d32;
+
+}
+
+
+/* VACIO */
+
+.vacio{
+
+    text-align:center;
+
+    padding:35px;
+
+    color:#78909c;
+
+}
+
+
+/* FOOTER */
+
+footer{
+
+    background:#263238;
+
+    color:white;
+
+    text-align:center;
+
+    padding:25px;
+
+    margin-top:30px;
+
+}
+
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .estadisticas{
+
+        grid-template-columns:
+        repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .admin-header{
+
+        display:block;
+
+    }
+
+    .admin-header button{
+
+        margin-top:12px;
+
+    }
+
+    .estadisticas{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .buscador{
+
+        display:block;
+
+    }
+
+    .buscador button{
+
+        width:100%;
+
+        margin-top:8px;
+
+    }
+
+    .info-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .acciones{
+
+        display:block;
+
+    }
+
+    .acciones button{
+
+        width:100%;
+
+        margin-top:7px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+
+        🛠️ EcoPuntos
+
+    </div>
+
+    <p>
+
+        Panel de Administración
+
+    </p>
+
+</header>
+
+
+
+<!-- LOGIN -->
+
+<div
+id="pantallaLogin"
+class="container">
+
+
+    <div class="card login">
+
+
+        <h2>
+
+            🔐 Acceso de administrador
+
+        </h2>
+
+
+        <p>
+
+            Ingresa al panel administrativo.
+
+        </p>
+
+
+        <br>
+
+
+        <input
+
+            id="adminUsuario"
+
+            type="text"
+
+            placeholder="Usuario">
+
+
+        <input
+
+            id="adminClave"
+
+            type="password"
+
+            placeholder="Contraseña">
+
+
+        <button
+
+            class="btn-entrar"
+
+            onclick="iniciarAdmin()">
+
+            Ingresar
+
+        </button>
+
+
+        <div
+        id="mensajeLogin"
+        class="mensaje oculto">
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+
+<!-- PANEL -->
+
+<div
+id="panelAdmin"
+class="container oculto">
+
+
+    <div class="admin-header">
+
+
+        <div>
+
+            <h2>
+
+                🛠️ Panel del administrador
+
+            </h2>
+
+            <p>
+
+                Control de reciclajes y retiros
+
+            </p>
+
+        </div>
+
+
+        <button
+
+            class="btn-salir"
+
+            onclick="cerrarAdmin()">
+
+            Cerrar sesión
+
+        </button>
+
+
+    </div>
+
+
+
+    <!-- ESTADISTICAS -->
+
+    <div class="estadisticas">
+
+
+        <div class="stat stat-pendiente">
+
+            ⏳ Solicitudes pendientes
+
+            <h3 id="totalPendientes">
+
+                0
+
+            </h3>
+
+        </div>
+
+
+        <div class="stat stat-aprobado">
+
+            ✅ Reciclajes aprobados
+
+            <h3 id="totalAprobadas">
+
+                0
+
+            </h3>
+
+        </div>
+
+
+        <div class="stat stat-rechazado">
+
+            ❌ Rechazados
+
+            <h3 id="totalRechazadas">
+
+                0
+
+            </h3>
+
+        </div>
+
+
+        <div class="stat stat-puntos">
+
+            ⭐ Puntos entregados
+
+            <h3 id="totalPuntos">
+
+                0
+
+            </h3>
+
+        </div>
+
+
+        <div class="stat stat-retiros">
+
+            💰 Retiros pendientes
+
+            <h3 id="totalRetirosPendientes">
+
+                0
+
+            </h3>
+
+        </div>
+
+
+    </div>
+
+
+
+    <br>
+
+
+
+    <!-- ========================
+         RETIROS
+    ========================= -->
+
+
+    <div class="card">
+
+
+        <h2>
+
+            💰 Solicitudes de retiro
+
+        </h2>
+
+
+        <p>
+
+            Revisa el código y entrega el dinero
+            al usuario antes de aprobar el retiro.
+
+        </p>
+
+
+        <div class="filtros">
+
+
+            <button
+
+                id="filtroRetirosTodos"
+
+                class="activo"
+
+                onclick="cambiarFiltroRetiro('todas')">
+
+                Todos
+
+            </button>
+
+
+            <button
+
+                id="filtroRetirosPendientes"
+
+                onclick="cambiarFiltroRetiro('pendiente')">
+
+                ⏳ Pendientes
+
+            </button>
+
+
+            <button
+
+                id="filtroRetirosAprobados"
+
+                onclick="cambiarFiltroRetiro('aprobado')">
+
+                ✅ Aprobados
+
+            </button>
+
+
+            <button
+
+                id="filtroRetirosRechazados"
+
+                onclick="cambiarFiltroRetiro('rechazado')">
+
+                ❌ Rechazados
+
+            </button>
+
+
+        </div>
+
+
+        <div
+        id="listaRetiros">
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- BUSCAR RETIRO -->
+
+    <div class="card">
+
+
+        <h2>
+
+            🔎 Buscar código de retiro
+
+        </h2>
+
+
+        <div class="buscador">
+
+
+            <input
+
+                id="buscarRetiro"
+
+                placeholder="Ejemplo: RET-4821">
+
+
+            <button
+
+                class="btn-buscar"
+
+                onclick="buscarRetiro()">
+
+                Buscar
+
+            </button>
+
+
+        </div>
+
+
+        <div
+        id="resultadoRetiro">
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ========================
+         RECICLAJES
+    ========================= -->
+
+
+    <div class="card">
+
+
+        <h2>
+
+            ♻️ Solicitudes de reciclaje
+
+        </h2>
+
+
+        <div class="filtros">
+
+
+            <button
+
+                id="filtroTodas"
+
+                class="activo"
+
+                onclick="cambiarFiltroReciclaje('todas')">
+
+                Todas
+
+            </button>
+
+
+            <button
+
+                id="filtroPendientes"
+
+                onclick="cambiarFiltroReciclaje('pendiente')">
+
+                ⏳ Pendientes
+
+            </button>
+
+
+            <button
+
+                id="filtroAprobadas"
+
+                onclick="cambiarFiltroReciclaje('aprobado')">
+
+                ✅ Aprobadas
+
+            </button>
+
+
+            <button
+
+                id="filtroRechazadas"
+
+                onclick="cambiarFiltroReciclaje('rechazado')">
+
+                ❌ Rechazadas
+
+            </button>
+
+
+        </div>
+
+
+        <div
+        id="listaSolicitudes">
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+
+<footer>
+
+    🛠️ EcoPuntos Perú
+
+    <br>
+
+    Panel de administración
+
+</footer>
+
+
+
+<script>
+
+
+/* =====================================
+   DATOS
+===================================== */
+
+
+let usuarios =
+
+    JSON.parse(
+
+        localStorage.getItem(
+
+            "ecoUsuarios"
+
+        )
+
+    ) || {};
+
+
+let solicitudes =
+
+    JSON.parse(
+
+        localStorage.getItem(
+
+            "ecoSolicitudes"
+
+        )
+
+    ) || [];
+
+
+let retiros =
+
+    JSON.parse(
+
+        localStorage.getItem(
+
+            "ecoRetiros"
+
+        )
+
+    ) || [];
+
+
+let filtroRetiro =
+
+    "todas";
+
+
+let filtroReciclaje =
+
+    "todas";
+
+
+
+/* =====================================
+   ADMIN
+===================================== */
+
+
+const ADMIN_USUARIO =
+
+    "administrador";
+
+
+const ADMIN_CLAVE =
+
+    "eco123";
+
+
+
+/* =====================================
+   LOGIN
+===================================== */
+
+
+function iniciarAdmin(){
+
+
+    const usuario =
+
+        document
+
+        .getElementById(
+
+            "adminUsuario"
+
+        )
+
+        .value
+
+        .trim();
+
+
+    const clave =
+
+        document
+
+        .getElementById(
+
+            "adminClave"
+
+        )
+
+        .value;
+
+
+    if(
+
+        usuario === ADMIN_USUARIO &&
+
+        clave === ADMIN_CLAVE
+
+    ){
+
+
+        document
+
+        .getElementById(
+
+            "pantallaLogin"
+
+        )
+
+        .classList
+
+        .add("oculto");
+
+
+        document
+
+        .getElementById(
+
+            "panelAdmin"
+
+        )
+
+        .classList
+
+        .remove("oculto");
+
+
+        cargarPanel();
+
+
+    }
+
+    else{
+
+
+        const caja =
+
+            document
+
+            .getElementById(
+
+                "mensajeLogin"
+
+            );
+
+
+        caja.textContent =
+
+            "❌ Usuario o contraseña incorrectos.";
+
+
+        caja.className =
+
+            "mensaje error";
+
+
+        caja.style.display =
+
+            "block";
+
+    }
+
+}
+
+
+
+/* =====================================
+   PANEL
+===================================== */
+
+
+function cargarPanel(){
+
+    recargarDatos();
+
+    actualizarEstadisticas();
+
+    mostrarRetiros();
+
+    mostrarSolicitudes();
+
+}
+
+
+
+/*
+   Vuelve a leer los datos del navegador.
+*/
+
+function recargarDatos(){
+
+
+    usuarios =
+
+        JSON.parse(
+
+            localStorage.getItem(
+
+                "ecoUsuarios"
+
+            )
+
+        ) || {};
+
+
+    solicitudes =
+
+        JSON.parse(
+
+            localStorage.getItem(
+
+                "ecoSolicitudes"
+
+            )
+
+        ) || [];
+
+
+    retiros =
+
+        JSON.parse(
+
+            localStorage.getItem(
+
+                "ecoRetiros"
+
+            )
+
+        ) || [];
+
+}
+
+
+
+/* =====================================
+   ESTADISTICAS
+===================================== */
+
+
+function actualizarEstadisticas(){
+
+
+    const pendientes =
+
+        solicitudes.filter(
+
+            s =>
+
+            s.estado ===
+
+            "pendiente"
+
+        ).length;
+
+
+    const aprobadas =
+
+        solicitudes.filter(
+
+            s =>
+
+            s.estado ===
+
+            "aprobado"
+
+        ).length;
+
+
+    const rechazadas =
+
+        solicitudes.filter(
+
+            s =>
+
+            s.estado ===
+
+            "rechazado"
+
+        ).length;
+
+
+    const puntos =
+
+        solicitudes
+
+        .filter(
+
+            s =>
+
+            s.estado ===
+
+            "aprobado"
+
+        )
+
+        .reduce(
+
+            (total,s) =>
+
+            total + Number(s.puntos),
+
+            0
+
+        );
+
+
+    const retirosPendientes =
+
+        retiros.filter(
+
+            r =>
+
+            r.estado ===
+
+            "pendiente"
+
+        ).length;
+
+
+    document
+
+    .getElementById(
+
+        "totalPendientes"
+
+    )
+
+    .textContent =
+
+        pendientes;
+
+
+    document
+
+    .getElementById(
+
+        "totalAprobadas"
+
+    )
+
+    .textContent =
+
+        aprobadas;
+
+
+    document
+
+    .getElementById(
+
+        "totalRechazadas"
+
+    )
+
+    .textContent =
+
+        rechazadas;
+
+
+    document
+
+    .getElementById(
+
+        "totalPuntos"
+
+    )
+
+    .textContent =
+
+        puntos;
+
+
+    document
+
+    .getElementById(
+
+        "totalRetirosPendientes"
+
+    )
+
+    .textContent =
+
+        retirosPendientes;
+
+}
+
+
+
+/* =====================================
+   MOSTRAR RETIROS
+===================================== */
+
+
+function mostrarRetiros(){
+
+
+    recargarDatos();
+
+
+    const contenedor =
+
+        document
+
+        .getElementById(
+
+            "listaRetiros"
+
+        );
+
+
+    contenedor.innerHTML = "";
+
+
+    let lista =
+
+        retiros
+
+        .slice()
+
+        .reverse();
+
+
+
+    if(
+
+        filtroRetiro !==
+
+        "todas"
+
+    ){
+
+        lista =
+
+            lista.filter(
+
+                r =>
+
+                r.estado ===
+
+                filtroRetiro
+
+            );
+
+    }
+
+
+
+    if(
+
+        lista.length === 0
+
+    ){
+
+        contenedor.innerHTML = `
+
+            <div class="vacio">
+
+                💰
+
+                <br><br>
+
+                No hay solicitudes
+                de retiro.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    lista.forEach(
+
+        retiro => {
+
+
+        let textoEstado =
+
+            "⏳ Pendiente";
+
+
+        let claseEstado =
+
+            "pendiente";
+
+
+
+        if(
+
+            retiro.estado ===
+
+            "aprobado"
+
+        ){
+
+            textoEstado =
+
+                "✅ Aprobado";
+
+            claseEstado =
+
+                "aprobado";
+
+        }
+
+
+
+        if(
+
+            retiro.estado ===
+
+            "rechazado"
+
+        ){
+
+            textoEstado =
+
+                "❌ Rechazado";
+
+            claseEstado =
+
+                "rechazado";
+
+        }
+
+
+
+        let acciones = "";
+
+
+
+        if(
+
+            retiro.estado ===
+
+            "pendiente"
+
+        ){
+
+            acciones = `
+
+                <div class="acciones">
+
+
+                    <button
+
+                        class="btn-aprobar"
+
+                        onclick=
+
+                        "aprobarRetiro('${retiro.id}')">
+
+                        ✅ Aprobar y entregar dinero
+
+                    </button>
+
+
+                    <button
+
+                        class="btn-rechazar"
+
+                        onclick=
+
+                        "rechazarRetiro('${retiro.id}')">
+
+                        ❌ Rechazar
+
+                    </button>
+
+
+                </div>
+
+            `;
+
+        }
+
+
+
+        const div =
+
+            document
+
+            .createElement(
+
+                "div"
+
+            );
+
+
+        div.className =
+
+            "solicitud";
+
+
+        div.innerHTML = `
+
+
+            <div class="solicitud-header">
+
+
+                <strong>
+
+                    💰 Solicitud de retiro
+
+                </strong>
+
+
+                <span
+
+                    class="estado ${claseEstado}">
+
+                    ${textoEstado}
+
+                </span>
+
+
+            </div>
+
+
+
+            <div class="info-grid">
+
+
+                <div class="info">
+
+                    <strong>
+
+                        👤 Usuario
+
+                    </strong>
+
+                    ${retiro.nombreUsuario}
+
+                </div>
+
+
+                <div class="info">
+
+                    <strong>
+
+                        📧 Correo
+
+                    </strong>
+
+                    ${retiro.usuario}
+
+                </div>
+
+
+                <div class="info">
+
+                    <strong>
+
+                        💰 Monto
+
+                    </strong>
+
+                    <span class="monto">
+
+                        S/
+
+                        ${Number(
+
+                            retiro.monto
+
+                        ).toFixed(2)}
+
+                    </span>
+
+                </div>
+
+
+                <div class="info">
+
+                    <strong>
+
+                        📅 Fecha
+
+                    </strong>
+
+                    ${retiro.fecha}
+
+                </div>
+
+
+            </div>
+
+
+
+            <p>
+
+                🔑 Código de retiro:
+
+            </p>
+
+
+            <br>
+
+
+            <span class="codigo">
+
+                ${retiro.codigo}
+
+            </span>
+
+
+            ${acciones}
+
+        `;
+
+
+        contenedor.appendChild(
+
+            div
+
+        );
+
+    });
+
+}
+
+
+
+/* =====================================
+   APROBAR RETIRO
+===================================== */
+
+
+function aprobarRetiro(id){
+
+
+    recargarDatos();
+
+
+    const retiro =
+
+        retiros.find(
+
+            r =>
+
+            String(r.id) ===
+
+            String(id)
+
+        );
+
+
+    if(!retiro){
+
+        alert(
+
+            "❌ No se encontró el retiro."
+
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+
+        retiro.estado !==
+
+        "pendiente"
+
+    ){
+
+        alert(
+
+            "Este retiro ya fue procesado."
+
+        );
+
+        return;
+
+    }
+
+
+
+    /*
+       BUSCAR USUARIO
+    */
+
+
+    const usuario =
+
+        usuarios[
+
+            retiro.usuario
+
+        ];
+
+
+    if(!usuario){
+
+        alert(
+
+            "❌ No se encontró la cuenta del usuario."
+
+        );
+
+        return;
+
+    }
+
+
+
+    /*
+       CALCULAR SALDO
+    */
+
+
+    const saldoActual =
+
+        Number(
+
+            usuario.puntos
+
+        ) / 100;
+
+
+    const monto =
+
+        Number(
+
+            retiro.monto
+
+        );
+
+
+
+    /*
+       VERIFICAR SALDO
+    */
+
+
+    if(
+
+        monto < 1 ||
+
+        monto > 50
+
+    ){
+
+        alert(
+
+            "❌ El monto del retiro no es válido."
+
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+
+        monto > saldoActual
+
+    ){
+
+        alert(
+
+            "❌ El usuario ya no tiene saldo suficiente.\n\n" +
+
+            "Saldo actual: S/ " +
+
+            saldoActual.toFixed(2) +
+
+            "\n" +
+
+            "Retiro: S/ " +
+
+            monto.toFixed(2)
+
+        );
+
+        return;
+
+    }
+
+
+
+    /*
+       CONFIRMACION
+    */
+
+
+    const confirmar =
+
+        confirm(
+
+            "¿Confirmas que verificaste el código " +
+
+            retiro.codigo +
+
+            " y entregaste S/ " +
+
+            monto.toFixed(2) +
+
+            " al usuario?"
+
+        );
+
+
+    if(!confirmar){
+
+        return;
+
+    }
+
+
+
+    /*
+       DESCONTAR PUNTOS
+       
+       S/ 1 = 100 puntos
+    */
+
+
+    const puntosARestar =
+
+        Math.round(
+
+            monto * 100
+
+        );
+
+
+    usuario.puntos =
+
+        Number(
+
+            usuario.puntos
+
+        ) -
+
+        puntosARestar;
+
+
+
+    /*
+       REGISTRAR HISTORIAL
+    */
+
+
+    if(
+
+        !usuario.historial
+
+    ){
+
+        usuario.historial = [];
+
+    }
+
+
+
+    usuario.historial.push({
+
+        texto:
+
+            "Retiro " +
+
+            retiro.codigo,
+
+
+        puntos:
+
+            -puntosARestar,
+
+
+        fecha:
+
+            new Date()
+
+            .toLocaleString()
+
+    });
+
+
+
+    /*
+       ACTUALIZAR RETIRO
+    */
+
+
+    retiro.estado =
+
+        "aprobado";
+
+
+    retiro.fechaAprobacion =
+
+        new Date()
+
+        .toLocaleString();
+
+
+
+    /*
+       GUARDAR USUARIO
+    */
+
+
+    usuarios[
+
+        retiro.usuario
+
+    ] = usuario;
+
+
+
+    localStorage.setItem(
+
+        "ecoUsuarios",
+
+        JSON.stringify(
+
+            usuarios
+
+        )
+
+    );
+
+
+
+    /*
+       GUARDAR RETIROS
+    */
+
+
+    localStorage.setItem(
+
+        "ecoRetiros",
+
+        JSON.stringify(
+
+            retiros
+
+        )
+
+    );
+
+
+
+    /*
+       ACTUALIZAR PANTALLA
+    */
+
+
+    cargarPanel();
+
+
+
+    alert(
+
+        "✅ Retiro aprobado correctamente.\n\n" +
+
+        "Código: " +
+
+        retiro.codigo +
+
+        "\n" +
+
+        "Monto entregado: S/ " +
+
+        monto.toFixed(2) +
+
+        "\n\n" +
+
+        "Se descontaron " +
+
+        puntosARestar +
+
+        " puntos."
+
+    );
+
+}
+
+
+
+/* =====================================
+   RECHAZAR RETIRO
+===================================== */
+
+
+function rechazarRetiro(id){
+
+
+    recargarDatos();
+
+
+    const retiro =
+
+        retiros.find(
+
+            r =>
+
+            String(r.id) ===
+
+            String(id)
+
+        );
+
+
+    if(!retiro){
+
+        alert(
+
+            "❌ Retiro no encontrado."
+
+        );
+
+        return;
+
+    }
+
+
+
+    if(
+
+        retiro.estado !==
+
+        "pendiente"
+
+    ){
+
+        alert(
+
+            "Este retiro ya fue procesado."
+
+        );
+
+        return;
+
+    }
+
+
+
+    const confirmar =
+
+        confirm(
+
+            "¿Quieres rechazar el retiro " +
+
+            retiro.codigo +
+
+            "?"
+
+        );
+
+
+    if(!confirmar){
+
+        return;
+
+    }
+
+
+
+    retiro.estado =
+
+        "rechazado";
+
+
+    retiro.fechaRechazo =
+
+        new Date()
+
+        .toLocaleString();
+
+
+
+    localStorage.setItem(
+
+        "ecoRetiros",
+
+        JSON.stringify(
+
+            retiros
+
+        )
+
+    );
+
+
+
+    cargarPanel();
+
+
+
+    alert(
+
+        "❌ Retiro rechazado.\n\n" +
+
+        "El saldo del usuario no fue descontado."
+
+    );
+
+}
+
+
+
+/* =====================================
+   BUSCAR RETIRO
+===================================== */
+
+
+function buscarRetiro(){
+
+
+    recargarDatos();
+
+
+    const codigo =
+
+        document
+
+        .getElementById(
+
+            "buscarRetiro"
+
+        )
+
+        .value
+
+        .trim()
+
+        .toUpperCase();
+
+
+    const resultado =
+
+        document
+
+        .getElementById(
+
+            "resultadoRetiro"
+
+        );
+
+
+    if(!codigo){
+
+        resultado.innerHTML = `
+
+            <div class="mensaje error">
+
+                Escribe un código de retiro.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    const retiro =
+
+        retiros.find(
+
+            r =>
+
+            r.codigo.toUpperCase() ===
+
+            codigo
+
+        );
+
+
+    if(!retiro){
+
+        resultado.innerHTML = `
+
+            <div class="mensaje error">
+
+                ❌ No se encontró el código
+
+                <strong>
+
+                    ${codigo}
+
+                </strong>.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    let estado =
+
+        "⏳ Pendiente";
+
+
+    if(
+
+        retiro.estado ===
+
+        "aprobado"
+
+    ){
+
+        estado =
+
+            "✅ Aprobado";
+
+    }
+
+
+    if(
+
+        retiro.estado ===
+
+        "rechazado"
+
+    ){
+
+        estado =
+
+            "❌ Rechazado";
+
+    }
+
+
+
+    let botones = "";
+
+
+    if(
+
+        retiro.estado ===
+
+        "pendiente"
+
+    ){
+
+        botones = `
+
+            <div class="acciones">
+
+
+                <button
+
+                    class="btn-aprobar"
+
+                    onclick=
+
+                    "aprobarRetiro('${retiro.id}')">
+
+                    ✅ Aprobar
+
+                </button>
+
+
+                <button
+
+                    class="btn-rechazar"
+
+                    onclick=
+
+                    "rechazarRetiro('${retiro.id}')">
+
+                    ❌ Rechazar
+
+                </button>
+
+
+            </div>
+
+        `;
+
+    }
+
+
+
+    resultado.innerHTML = `
+
+        <br>
+
+
+        <div class="solicitud">
+
+
+            <div class="solicitud-header">
+
+
+                <strong>
+
+                    💰 Retiro encontrado
+
+                </strong>
+
+
+                <span>
+
+                    ${estado}
+
+                </span>
+
+
+            </div>
+
+
+
+            <div class="info-grid">
+
+
+                <div class="info">
+
+                    <strong>
+
+                        👤 Usuario
+
+                    </strong>
+
+                    ${retiro.nombreUsuario}
+
+                </div>
+
+
+                <div class="info">
+
+                    <strong>
+
+                        💰 Monto
+
+                    </strong>
+
+                    S/
+
+                    ${Number(
+
+                        retiro.monto
+
+                    ).toFixed(2)}
+
+                </div>
+
+
+            </div>
+
+
+
+            <p>
+
+                🔑 Código:
+
+            </p>
+
+
+            <br>
+
+
+            <span class="codigo">
+
+                ${retiro.codigo}
+
+            </span>
+
+
+            ${botones}
+
+        </div>
+
+    `;
+
+}
+
+
+
+/* =====================================
+   FILTRO RETIROS
+===================================== */
+
+
+function cambiarFiltroRetiro(
+
+    filtro
+
+){
+
+
+    filtroRetiro =
+
+        filtro;
+
+
+    document
+
+    .querySelectorAll(
+
+        ".filtros button"
+
+    )
+
+    .forEach(
+
+        b =>
+
+        b.classList
+
+        .remove("activo")
+
+    );
+
+
+    if(
+
+        filtro ===
+
+        "todas"
+
+    ){
+
+        document
+
+        .getElementById(
+
+            "filtroRetirosTodos"
+
+        )
+
+        .classList
+
+        .add("activo");
+
+    }
+
+
+    if(
+
+        filtro ===
+
+        "pendiente"
+
+    ){
+
+        document
+
+        .getElementById(
+
+            "filtroRetirosPendientes"
+
+        )
+
+        .classList
+
+        .add("activo");
+
+    }
+
+
+    if(
+
+        filtro ===
+
+        "aprobado"
+
+    ){
+
+        document
+
+        .getElementById(
+
+            "filtroRetirosAprobados"
+
+        )
+
+        .classList
+
+        .add("activo");
+
+    }
+
+
+    if(
+
+        filtro ===
+
+        "rechazado"
+
+    ){
+
+        document
+
+        .getElementById(
+
+            "filtroRetirosRechazados"
+
+        )
+
+        .classList
+
+        .add("activo");
+
+    }
+
+
+    mostrarRetiros();
+
+}
+
+
+
+/* =====================================
+   RECICLAJES
+===================================== */
+
+
+function mostrarSolicitudes(){
+
+
+    recargarDatos();
+
+
+    const contenedor =
+
+        document
+
+        .getElementById(
+
+            "listaSolicitudes"
+
+        );
+
+
+    contenedor.innerHTML = "";
+
+
+    let lista =
+
+        solicitudes
+
+        .slice()
+
+        .reverse();
+
+
+
+    if(
+
+        filtroReciclaje !==
+
+        "todas"
+
+    ){
+
+        lista =
+
+            lista.filter(
+
+                s =>
+
+                s.estado ===
+
+                filtroReciclaje
+
+            );
+
+    }
+
+
+
+    if(
+
+        lista.length === 0
+
+    ){
+
+        contenedor.innerHTML = `
+
+            <div class="vacio">
+
+                📭
+
+                <br><br>
+
+                No hay solicitudes.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+
+
+    lista.forEach(
+
+        solicitud => {
+
+
+        let texto =
+
+            "⏳ Pendiente";
+
+
+        let clase =
+
+            "pendiente";
+
+
+        if(
+
+            solicitud.estado ===
+
+            "aprobado"
+
+        ){
+
+            texto =
+
+                "✅ Aprobado";
+
+            clase =
+
+                "aprobado";
+
+        }
+
+
+        if(
+
+            solicitud.estado ===
+
+            "rechazado"
+
+        ){
+
+            texto =
+
+                "❌ Rechazado";
+
+            clase =
+
+                "rechazado";
+
+        }
+
+
+
+        let acciones = "";
+
+
+        if(
+
+            solicitud.estado ===
+
+            "pendiente"
+
+        ){
+
+            acciones = `
+
+                <div class="acciones">
+
+
+                    <button
+
+                        class="btn-aprobar"
+
+                        onclick=
+
+                        "aprobarReciclaje('${solicitud.id}')">
+
+                        ✅ Aprobar
+
+                    </button>
+
+
+                    <button
+
+                        class="btn-rechazar"
+
+                        onclick=
+
+                        "rechazarReciclaje('${solicitud.id}')">
+
+                        ❌ Rechazar
+
+                    </button>
+
+
+                </div>
+
+            `;
+
+        }
+
+
+
+        const div =
+
+            document
+
+            .createElement(
+
+                "div"
+
+            );
+
+
+        div.className =
+
+            "solicitud";
+
+
+        div.innerHTML = `
+
+            <div class="solicitud-header">
+
+                <strong>
+
+                    ♻️
+
+                    ${solicitud.residuo}
+
+                </strong>
+
+                <span
+
+                    class="estado ${clase}">
+
+                    ${texto}
+
+                </span>
+
+            </div>
+
+
+            <div class="info-grid">
+
+
+                <div class="info">
+
+                    <strong>
+
+                        👤 Usuario
+
+                    </strong>
+
+                    ${solicitud.nombreUsuario}
+
+                </div>
+
+
+                <div class="info">
+
+                    <strong>
+
+                        📧 Correo
+
+                    </strong>
+
+                    ${solicitud.usuario}
+
+                </div>
+
+
+                <div class="info">
+
+                    <strong>
+
+                        ⭐ Puntos
+
+                    </strong>
+
+                    +${solicitud.puntos}
+
+                </div>
+
+
+                <div class="info">
+
+                    <strong>
+
+                        📅 Fecha
+
+                    </strong>
+
+                    ${solicitud.fecha}
+
+                </div>
+
+
+            </div>
+
+
+            <p>
+
+                🔑 Código:
+
+            </p>
+
+
+            <br>
+
+
+            <span class="codigo">
+
+                ${solicitud.codigo}
+
+            </span>
+
+
+            ${acciones}
+
+        `;
+
+
+        contenedor.appendChild(
+
+            div
+
+        );
+
+    });
+
+}
+
+
+
+/* =====================================
+   APROBAR RECICLAJE
+===================================== */
+
+
+function aprobarReciclaje(id){
+
+
+    recargarDatos();
+
+
+    const solicitud =
+
+        solicitudes.find(
+
+            s =>
+
+            String(s.id) ===
+
+            String(id)
+
+        );
+
+
+    if(!solicitud){
+
+        alert(
+
+            "Solicitud no encontrada."
+
+        );
+
+        return;
+
+    }
+
+
+    if(
+
+        solicitud.estado !==
+
+        "pendiente"
+
+    ){
+
+        return;
+
+    }
+
+
+
+    const usuario =
+
+        usuarios[
+
+            solicitud.usuario
+
+        ];
+
+
+    if(!usuario){
+
+        alert(
+
+            "Usuario no encontrado."
+
+        );
+
+        return;
+
+    }
+
+
+
+    const confirmar =
+
+        confirm(
+
+            "¿Confirmas que verificaste el reciclaje " +
+
+            solicitud.codigo +
+
+            "?"
+
+        );
+
+
+    if(!confirmar){
+
+        return;
+
+    }
+
+
+
+    solicitud.estado =
+
+        "aprobado";
+
+
+
+    usuario.puntos =
+
+        Number(
+
+            usuario.puntos
+
+        ) +
+
+        Number(
+
+            solicitud.puntos
+
+        );
+
+
+
+    if(
+
+        !usuario.historial
+
+    ){
+
+        usuario.historial = [];
+
+    }
+
+
+
+    usuario.historial.push({
+
+        texto:
+
+            solicitud.residuo,
+
+        puntos:
+
+            solicitud.puntos,
+
+        fecha:
+
+            new Date()
+
+            .toLocaleString()
+
+    });
+
+
+
+    usuarios[
+
+        solicitud.usuario
+
+    ] = usuario;
+
+
+
+    localStorage.setItem(
+
+        "ecoUsuarios",
+
+        JSON.stringify(
+
+            usuarios
+
+        )
+
+    );
+
+
+    localStorage.setItem(
+
+        "ecoSolicitudes",
+
+        JSON.stringify(
+
+            solicitudes
+
+        )
+
+    );
+
+
+    cargarPanel();
+
+
+    alert(
+
+        "✅ Reciclaje aprobado.\n\n" +
+
+        "Se agregaron +" +
+
+        solicitud.puntos +
+
+        " puntos."
+
+    );
+
+}
+
+
+
+/* =====================================
+   RECHAZAR RECICLAJE
+===================================== */
+
+
+function rechazarReciclaje(id){
+
+
+    recargarDatos();
+
+
+    const solicitud =
+
+        solicitudes.find(
+
+            s =>
+
+            String(s.id) ===
+
+            String(id)
+
+        );
+
+
+    if(!solicitud){
+
+        return;
+
+    }
+
+
+    if(
+
+        solicitud.estado !==
+
+        "pendiente"
+
+    ){
+
+        return;
+
+    }
+
+
+
+    const confirmar =
+
+        confirm(
+
+            "¿Deseas rechazar este reciclaje?"
+
+        );
+
+
+    if(!confirmar){
+
+        return;
+
+    }
+
+
+
+    solicitud.estado =
+
+        "rechazado";
+
+
+
+    localStorage.setItem(
+
+        "ecoSolicitudes",
+
+        JSON.stringify(
+
+            solicitudes
+
+        )
+
+    );
+
+
+    cargarPanel();
+
+
+    alert(
+
+        "❌ Reciclaje rechazado."
+
+    );
+
+}
+
+
+
+/* =====================================
+   FILTRO RECICLAJE
+===================================== */
+
+
+function cambiarFiltroReciclaje(
+
+    filtro
+
+){
+
+
+    filtroReciclaje =
+
+        filtro;
+
+
+    document
+
+    .querySelectorAll(
+
+        ".card:nth-of-type(4) .filtros button"
+
+    );
+
+
+
+    mostrarSolicitudes();
+
+}
+
+
+
+/* =====================================
+   CERRAR
+===================================== */
+
+
+function cerrarAdmin(){
+
+
+    document
+
+    .getElementById(
+
+        "panelAdmin"
+
+    )
+
+    .classList
+
+    .add("oculto");
+
+
+    document
+
+    .getElementById(
+
+        "pantallaLogin"
+
+    )
+
+    .classList
+
+    .remove("oculto");
+
+
+    document
+
+    .getElementById(
+
+        "adminUsuario"
+
+    )
+
+    .value = "";
+
+
+    document
+
+    .getElementById(
+
+        "adminClave"
+
+    )
+
+    .value = "";
+
+}
+
+</script>
+
+</body>
+
+</html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+</body>
+</html>
